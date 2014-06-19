@@ -5,7 +5,7 @@ Just dumps header information from Dolphin DTM movie files in a human-readable f
 ### Example
 
 
-![Example](https://github.com/lioncash/DTMInfo/blob/master/img/Example.png)
+![Example](https://raw.githubusercontent.com/lioncash/DTMInfo/master/img/Example.png)
 
 
 ### License
