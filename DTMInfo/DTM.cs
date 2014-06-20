@@ -67,7 +67,7 @@ namespace DTMInfo
 			reader.BaseStream.Position += 13;
 
 			SecondDiscName              = Encoding.UTF8.GetString(reader.ReadBytes(40));
-			GitRevision                 = ExtractRevisionOrMD5(reader.ReadBytes(20)); // TODO: This will likely need to be manually converted.
+			GitRevision                 = ExtractRevisionOrMD5(reader.ReadBytes(20));
 			DSPIROMHash                 = reader.ReadUInt32();
 			DSPCoefHash                 = reader.ReadUInt32();
 
