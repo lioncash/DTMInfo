@@ -31,7 +31,7 @@ namespace DTMInfo
 
 			GameID                      = Encoding.UTF8.GetString(reader.ReadBytes(6));
 			IsWiiGame                   = reader.ReadBoolean();
-			ConnectedControllers        = reader.ReadByte();
+			ConnectedControllers        = GetControllerStates(reader.ReadByte());
 			IsFromSaveState             = reader.ReadBoolean();
 			FrameCount                  = reader.ReadUInt64();
 			InputFrameCount             = reader.ReadUInt64();
@@ -92,7 +92,7 @@ namespace DTMInfo
 		/// <summary>
 		/// Number of connected controllers (1-4)
 		/// </summary>
-		public int ConnectedControllers { get; private set; }
+		public string ConnectedControllers { get; private set; }
 
 		/// <summary>
 		/// false indicates that the recording started from bootup, true for savestate
@@ -226,6 +226,27 @@ namespace DTMInfo
 			{
 				sb.Append(b.ToString("X"));
 			}
+
+			return sb.ToString();
+		}
+
+		private static string GetControllerStates(byte flags)
+		{
+			StringBuilder sb = new StringBuilder("Controllers connected: GameCube [");
+
+			sb.Append((flags & 0x01) != 0 ? "1" : " ");
+			sb.Append((flags & 0x02) != 0 ? "2" : " ");
+			sb.Append((flags & 0x04) != 0 ? "3" : " ");
+			sb.Append((flags & 0x08) != 0 ? "4" : " ");
+
+			sb.Append("] | WiiMotes [");
+
+			sb.Append((flags & 0x10) != 0 ? "1" : " ");
+			sb.Append((flags & 0x20) != 0 ? "2" : " ");
+			sb.Append((flags & 0x40) != 0 ? "3" : " ");
+			sb.Append((flags & 0x80) != 0 ? "4" : " ");
+
+			sb.Append("]");
 
 			return sb.ToString();
 		}
